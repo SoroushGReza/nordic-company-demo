@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// API 
+// API
 import { axiosReq } from "../api/axiosDefaults";
 // Utils
 import { sendEmail } from "../utils/sendEmail";
@@ -93,8 +93,8 @@ const Contact = () => {
               />
               <h3>Email sent successfully!</h3>
               <p>
-                We will get back to you as soon as possible. Normally 24-48
-                hours.
+                This is a demo version, so no one will actually get back to you!
+                🤔
               </p>
             </Col>
           </Row>
@@ -169,8 +169,8 @@ const Contact = () => {
               {/* Phone Section */}
               <div className={styles.phoneSection}>
                 <h4>Phone</h4>
-                <a href="tel:+46708480032" className={styles.contactPhone}>
-                  +46 708 48 00 32
+                <a href="tel:+46712345678" className={styles.contactPhone}>
+                  +46 712 34 56 78
                 </a>
                 <p className={styles.whatsappText}>
                   <FontAwesomeIcon
@@ -188,7 +188,7 @@ const Contact = () => {
               <div className={styles.instagramSection}>
                 <h4>Instagram</h4>
                 <a
-                  href="https://www.instagram.com/facebykristine/"
+                  href="https://www.instagram.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.instaLink}
