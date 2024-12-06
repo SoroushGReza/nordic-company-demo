@@ -37,7 +37,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEVELOPMENT") == "True"
 
-ALLOWED_HOSTS = ["nordic-company-b4376fa6e38c.herokuapp.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["nordic-company-demo-bf7cf172f284.herokuapp.com", "localhost", "127.0.0.1"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.gitpod.io",
