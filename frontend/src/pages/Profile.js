@@ -40,6 +40,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // Fetch profile data on component mount
   useEffect(() => {
@@ -48,12 +49,12 @@ function Profile() {
         const { data } = await axiosReq.get("/accounts/profile/");
         setProfileData(data);
         setImagePreview(data.profile_image);
+        setIsAdmin(data.is_staff || data.is_superuser);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching profile data:", err);
-        setLoading(false); // Set loading to false even if there is error
+        setLoading(false);
         if (err.response && err.response.status === 401) {
-          // Redirect to login if not logged in
           window.location.href = "/login";
         }
       }
@@ -192,6 +193,19 @@ function Profile() {
             className={styles.profileImageText}
           />
         </Row>
+
+        {isAdmin && (
+          <Row className="justify-content-center mt-4">
+            <Col md={6} className="text-center">
+              <Alert variant="info">
+                In the Demo version, I have disabled the Profile editing and
+                deletion of the Admin user. To try this functionality, please
+                register a new user.
+              </Alert>
+            </Col>
+          </Row>
+        )}
+
         <Row className="justify-content-center">
           <Col md={7}>
             {/* Display any errors */}
@@ -229,6 +243,7 @@ function Profile() {
                       accept="image/*"
                       onChange={handleImageChange}
                       className="d-none"
+                      disabled={isAdmin}
                     />
                   </Form.Group>
                 </Col>
@@ -248,6 +263,7 @@ function Profile() {
                       value={profileData.name || ""}
                       onChange={handleProfileChange}
                       className={`${inputStyles["form-input"]}`}
+                      disabled={isAdmin}
                     />
                     {errors.name && (
                       <div className="text-danger">{errors.name}</div>
@@ -263,6 +279,7 @@ function Profile() {
                       value={profileData.surname || ""}
                       onChange={handleProfileChange}
                       className={`${inputStyles["form-input"]}`}
+                      disabled={isAdmin}
                     />
                     {errors.surname && (
                       <div className="text-danger">{errors.surname}</div>
@@ -278,6 +295,7 @@ function Profile() {
                       value={profileData.email || ""}
                       onChange={handleProfileChange}
                       className={`${inputStyles["form-input"]}`}
+                      disabled={isAdmin}
                     />
                     {errors.email && (
                       <div className="text-danger">{errors.email}</div>
@@ -293,6 +311,7 @@ function Profile() {
                       value={profileData.phone_number || ""}
                       onChange={handleProfileChange}
                       className={`${inputStyles["form-input"]}`}
+                      disabled={isAdmin}
                     />
                     {errors.phone_number && (
                       <div className="text-danger">{errors.phone_number}</div>
@@ -303,6 +322,7 @@ function Profile() {
                       variant="primary"
                       type="submit"
                       className={`${styles["customButton"]} mt-4`}
+                      disabled={isAdmin}
                     >
                       Update
                     </Button>
@@ -334,6 +354,7 @@ function Profile() {
                       value={passwordData.old_password}
                       onChange={handlePasswordChange}
                       className={`${inputStyles["form-input"]} ${passwordInput["passwordInput"]}`}
+                      disabled={isAdmin}
                     />
                   </Form.Group>
                   <Form.Group controlId="new_password">
@@ -346,6 +367,7 @@ function Profile() {
                       value={passwordData.new_password}
                       onChange={handlePasswordChange}
                       className={`${inputStyles["form-input"]} ${passwordInput["passwordInput"]}`}
+                      disabled={isAdmin}
                     />
                   </Form.Group>
                   <div className="d-flex justify-content-center">
@@ -353,6 +375,7 @@ function Profile() {
                       variant="primary"
                       type="submit"
                       className={`${styles["customButton"]} mt-4`}
+                      disabled={isAdmin}
                     >
                       Save
                     </Button>
@@ -368,12 +391,12 @@ function Profile() {
                   <FontAwesomeIcon icon={faTriangleExclamation} /> Delete
                   Account
                 </h3>
-                <h6 className="text-center">This action is not reversable!</h6>
                 <div className="d-flex justify-content-center">
                   <Button
                     variant="danger"
                     onClick={() => setShowDeleteModal(true)}
                     className={`${styles["deleteButton"]} mt-4`}
+                    disabled={isAdmin}
                   >
                     Delete
                   </Button>
