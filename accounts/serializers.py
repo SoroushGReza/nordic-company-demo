@@ -65,6 +65,14 @@ class ChangePasswordSerializer(serializers.Serializer):
 class DeleteAccountSerializer(serializers.Serializer):
     password = serializers.CharField(required=True)
 
+    def validate(self, attrs):
+        request = self.context.get("request")
+        if request.user.is_staff or request.user.is_superuser:
+            raise serializers.ValidationError(
+                "Admin and superuser accounts cannot be deleted in the demo version."
+            )
+        return attrs
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

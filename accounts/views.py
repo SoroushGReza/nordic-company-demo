@@ -34,14 +34,14 @@ class UserRegistrationView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         user = serializer.save()
-        login(self.request, user)  # Logga in anv�ndaren
+        login(self.request, user)  # Log in user
 
-        # Generera en JWT-token
+        # Generate JWT-token
         refresh = RefreshToken.for_user(user)
-        # Spara eller skapa en token om du anv�nder den ocks� (valfritt beroende p� ditt behov)
+        # Save or create a token if you use it as well (optional depending on your needs)
         token, created = Token.objects.get_or_create(user=user)
 
-        # Spara JWT-token f�r att skicka den i post metoden
+        # Save JWT-token to send it in the post method
         self.jwt_refresh = refresh
 
     def post(self, request, *args, **kwargs):
@@ -69,8 +69,8 @@ class UserLoginView(APIView):
             password=serializer.validated_data["password"],
         )
         if user is not None:
-            login(request, user)  # Logga in anv�ndaren
-            # Generera en JWT-token
+            login(request, user)  # Log in user
+            # Generate JWT-token
             refresh = RefreshToken.for_user(user)
             return Response(
                 {
@@ -125,6 +125,15 @@ class DeleteAccountView(APIView):
         user = request.user
         serializer = DeleteAccountSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        # Prevent deletion of admin or superuser
+        if user.is_staff or user.is_superuser:
+            return Response(
+                {
+                    "error": "Admin and superuser accounts cannot be deleted in the demo version."
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )
 
         if not user.check_password(serializer.validated_data["password"]):
             return Response(

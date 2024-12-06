@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
+from django.core.exceptions import PermissionDenied
+from django.contrib import messages
 
 
 class CustomUserAdmin(UserAdmin):
@@ -12,7 +14,10 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Personal info", {"fields": ("name", "surname", "phone_number", "profile_image")}),
+        (
+            "Personal info",
+            {"fields": ("name", "surname", "phone_number", "profile_image")},
+        ),
         (
             "Permissions",
             {
@@ -47,6 +52,16 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
+
+    # Prevent deletion of admin/superuser in the admin panel
+    def delete_model(self, request, obj):
+        if obj.is_staff or obj.is_superuser:
+            messages.error(
+                request,
+                "Admin and superuser accounts cannot be deleted in the demo version.",
+            )
+        else:
+            super().delete_model(request, obj)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
