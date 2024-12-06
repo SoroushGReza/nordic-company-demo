@@ -98,7 +98,7 @@ const Menu = () => {
 
       {/* Instagram Link */}
       <a
-        href="https://www.instagram.com/facebykristine/"
+        href="https://www.instagram.com/"
         target="_blank"
         rel="noopener noreferrer"
         className={styles.link}
