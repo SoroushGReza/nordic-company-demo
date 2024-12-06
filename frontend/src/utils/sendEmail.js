@@ -1,9 +1,9 @@
 import emailjs from "emailjs-com";
-import emailConfig from "./emailConfig"; // Korrekt import
+import emailConfig from "./emailConfig";
 
 export function sendEmail(formData) {
   return emailjs.send(
-    emailConfig.EMAILJS_SERVICE_ID, // Använd emailConfig-objektet
+    emailConfig.EMAILJS_SERVICE_ID, 
     emailConfig.EMAILJS_TEMPLATE_ID,
     {
       from_name: formData.name,

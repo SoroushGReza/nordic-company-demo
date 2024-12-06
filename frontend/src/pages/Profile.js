@@ -219,7 +219,6 @@ function Profile() {
                 <Col xs="auto" className="text-center">
                   {/* Profile Image */}
                   <Form.Group
-                    controlId="profile_image"
                     className={`mb-4 ${styles.imageUploadGroup}`}
                   >
                     <label
@@ -253,7 +252,7 @@ function Profile() {
               <Row>
                 <Col className={`${styles.formContainer}`}>
                   <h3 className="text-center">Update Profile</h3>
-                  <Form.Group controlId="name">
+                  <Form.Group>
                     <Form.Label className={`${inputStyles["form-label"]} mt-2`}>
                       Name
                     </Form.Label>
@@ -269,7 +268,7 @@ function Profile() {
                       <div className="text-danger">{errors.name}</div>
                     )}
                   </Form.Group>
-                  <Form.Group controlId="surname">
+                  <Form.Group>
                     <Form.Label className={`${inputStyles["form-label"]} mt-3`}>
                       Surname
                     </Form.Label>
@@ -285,7 +284,7 @@ function Profile() {
                       <div className="text-danger">{errors.surname}</div>
                     )}
                   </Form.Group>
-                  <Form.Group controlId="email">
+                  <Form.Group>
                     <Form.Label className={`${inputStyles["form-label"]} mt-3`}>
                       Email
                     </Form.Label>
@@ -301,7 +300,7 @@ function Profile() {
                       <div className="text-danger">{errors.email}</div>
                     )}
                   </Form.Group>
-                  <Form.Group controlId="phone_number">
+                  <Form.Group>
                     <Form.Label className={`${inputStyles["form-label"]} mt-3`}>
                       Phone Number
                     </Form.Label>
@@ -344,7 +343,7 @@ function Profile() {
                   <Alert variant="danger">{errors.old_password}</Alert>
                 )}
                 <Form onSubmit={handleChangePassword}>
-                  <Form.Group controlId="old_password">
+                  <Form.Group>
                     <Form.Label className={`${inputStyles["form-label"]} mt-2`}>
                       Old Password
                     </Form.Label>
@@ -357,7 +356,7 @@ function Profile() {
                       disabled={isAdmin}
                     />
                   </Form.Group>
-                  <Form.Group controlId="new_password">
+                  <Form.Group>
                     <Form.Label className={`${inputStyles["form-label"]} mt-3`}>
                       New Password
                     </Form.Label>
@@ -423,7 +422,7 @@ function Profile() {
               {errors.password && (
                 <Alert variant="danger">{errors.password}</Alert>
               )}
-              <Form.Group controlId="delete_password">
+              <Form.Group>
                 <p className={`${modalStyles["warningText"]}`}>
                   <FontAwesomeIcon
                     className={`${modalStyles["warningIcon"]}`}
