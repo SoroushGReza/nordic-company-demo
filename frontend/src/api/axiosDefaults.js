@@ -4,7 +4,7 @@ import axios from "axios";
 axios.defaults.baseURL =
     process.env.NODE_ENV === "development"
         ? "http://localhost:8000/api"
-        : "https://nordic-company-b4376fa6e38c.herokuapp.com/api/";
+        : "https://nordic-company-demo-bf7cf172f284.herokuapp.com/api/";
 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.withCredentials = true;

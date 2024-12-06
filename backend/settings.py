@@ -42,12 +42,12 @@ ALLOWED_HOSTS = ["nordic-company-b4376fa6e38c.herokuapp.com", "localhost", "127.
 CSRF_TRUSTED_ORIGINS = [
     "https://*.gitpod.io",
     "http://localhost:3000",
-    "https://nordic-company-b4376fa6e38c.herokuapp.com",
+    "https://nordic-company-demo-bf7cf172f284.herokuapp.com",
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://nordic-company-b4376fa6e38c.herokuapp.com",
+    "https://nordic-company-demo-bf7cf172f284.herokuapp.com",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
